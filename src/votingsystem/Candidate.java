@@ -7,24 +7,34 @@ public class Candidate extends Person {
 
     /**
      * Creates a candidate - Constructor
-     * @param age
-     * @param gender
-     * @param firstName
-     * @param lastName
-     * @param politicalParty
+     * @param age - set person's age
+     * @param gender - set person's gender
+     * @param firstName - set person's first name
+     * @param lastName - set person's last name
+     * @param politicalParty - set person's political party
      */
     public Candidate(int age, char gender, String firstName, String lastName, String politicalParty) throws MinimumAgeException {
         super(age, gender, firstName, lastName, politicalParty);
 
+        this.voteCount = 0;
+
+        // If candidate is less than 25, do not create candidate and throw error
         if (age < 25) {
-            throw new MinimumAgeException("Candidate's is ineligible due to age");
+            throw new MinimumAgeException("Candidate's age cannot be less than 25");
         }
     }
 
+    /**
+     * Getter for vote count
+     * @return - candidates vote count
+     */
     public int getVoteCount() {
         return voteCount;
     }
 
+    /**
+     * Increase the candidates vote count
+     */
     public void incrementVoteCount() {
         voteCount++;
     }

@@ -1,5 +1,5 @@
-import votingsystem.Person;
-import exceptions.MinimumAgeException;
+import votingsystem.*;
+import exceptions.*;
 
 public class Main {
     public static void main(String[] args) {
