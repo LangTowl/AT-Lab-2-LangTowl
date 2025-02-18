@@ -1,6 +1,6 @@
 package votingsystem;
 
-import exceptions.CandidateNoteFoundException;
+import exceptions.CandidateNotFoundException;
 import exceptions.MissingCandidatesException;
 import java.util.ArrayList;
 
@@ -25,9 +25,9 @@ public class VotingMachine {
      * If voter hasn't voted and their candidate exists, increase that candidates vote count
      * @param v - Voter obj.
      * @param c - Candidate obj.
-     * @throws CandidateNoteFoundException - If candidate not found
+     * @throws CandidateNotFoundException - If candidate not found
      */
-    public void vote(Voter v, Candidate c) throws CandidateNoteFoundException {
+    public void vote(Voter v, Candidate c) throws CandidateNotFoundException {
         // Vote only counts if voter hasn't voted
         if (!v.hasVoted()) {
             // Loop through candidates to find voter's choice
@@ -41,7 +41,7 @@ public class VotingMachine {
             }
 
             // If loop finishes without finding match, candidate doesn't exist
-            throw new CandidateNoteFoundException("Candidate does not exist in the candidates collection");
+            throw new CandidateNotFoundException("Candidate does not exist in the candidates collection");
         }
     }
 
