@@ -13,11 +13,11 @@ public class VotingMachine {
      * @throws MissingCandidatesException thrown if list of candidates is empty
      */
     public VotingMachine(ArrayList<Candidate> candidates) throws MissingCandidatesException {
-        this.candidates = candidates;
-
         // Check to see if candidate list is empty, if so, don't create object and throw error
         if (candidates.isEmpty()) {
             throw new MissingCandidatesException("The candidate list cannot be null or empty");
+        } else {
+            this.candidates = candidates;
         }
     }
 
@@ -29,7 +29,7 @@ public class VotingMachine {
      */
     public void vote(Voter v, Candidate c) throws CandidateNoteFoundException {
         // Vote only counts if voter hasn't voted
-        if (v.hasVoted()) {
+        if (!v.hasVoted()) {
             // Loop through candidates to find voter's choice
             for (Candidate candidate : candidates) {
                 // Check for match and execute operation
@@ -49,8 +49,23 @@ public class VotingMachine {
      * Tally results
      */
     public void tally() {
+
+        int max = -1;
+        Candidate winner = null;
+
         for (Candidate candidate : candidates) {
             System.out.println(candidate.getFullName() + " has " + candidate.getVoteCount() + " votes.");
+
+            if (candidate.getVoteCount() > max) {
+                winner = candidate;
+                max = candidate.getVoteCount();
+            }
+        }
+
+        if (winner != null) {
+            System.out.println(winner.getFullName() + " has won with " + winner.getVoteCount() + " votes.");
+        } else {
+            System.out.println("No winner found.");
         }
     }
 }
